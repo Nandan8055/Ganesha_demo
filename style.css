@@ -388,14 +388,14 @@ body {
   }
   .scene { padding-top: 42px; }
   .top-milk-button {
-    top: 94px;
-    right: 12px;
+    top: 17px;
+    right: 94px;
     width: 62px;
     height: 62px;
   }
   .milk-message {
-    top: 163px;
-    right: 8px;
+    top: 88px;
+    right: 84px;
     width: 135px;
   }
   .pooja-scene {
@@ -403,4 +403,39 @@ body {
     bottom: 0;
     width: clamp(110px, 33%, 190px) !important;
   }
+  .milk-box {
+    width: 94vw;
+    max-height: 92dvh;
+  }
+  .milk-gif {
+    max-height: 58dvh;
+  }
+  .milk-caption {
+    padding: 12px 16px 16px;
+  }
+  .blank-page {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  .final-scene {
+    min-height: 100dvh;
+    padding: 90px 16px 34px;
+  }
+  .final-gif {
+    width: min(300px, 74vw);
+    border-radius: 18px;
+  }
+  .final-message {
+    gap: 14px;
+  }
+  .final-message p {
+    font-size: 17px;
+  }
+  .final-decoration {
+    width: 58px;
+  }
+  .decoration-one { top: 28px; right: 18px; }
+  .decoration-two { top: 28px; left: 18px; }
+  .decoration-three { bottom: 25px; left: 18px; }
+  .decoration-four { right: 18px; bottom: 25px; }
 }
