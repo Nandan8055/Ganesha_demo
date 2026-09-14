@@ -1,0 +1,391 @@
+* { box-sizing: border-box; }
+
+:root {
+  --cream: #fffaf1;
+  --brown: #4b2d20;
+  --gold: #c88a28;
+}
+
+html, body { margin: 0; min-height: 100%; }
+
+body {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--brown);
+}
+
+.home {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #fff;
+}
+
+.home-card {
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.om {
+  color: var(--gold);
+  font-size: 31px;
+  margin-bottom: 14px;
+}
+
+.home h1 {
+  font-size: clamp(38px, 7vw, 62px);
+  font-weight: 500;
+  margin: 0;
+}
+
+.home p {
+  color: #80695a;
+  font-size: 18px;
+  margin: 14px 0 30px;
+}
+
+.enter-btn {
+  display: inline-block;
+  background: var(--brown);
+  color: white;
+  padding: 13px 32px;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: transform .2s ease;
+}
+
+.enter-btn:hover { transform: translateY(-2px); }
+
+.offering-page {
+  min-height: 100vh;
+  background: #fffaf1;
+  overflow-x: hidden;
+}
+
+.scene {
+  min-height: 100vh;
+  text-align: center;
+  padding: 54px 20px 60px;
+}
+
+.scene header p {
+  color: #80695a;
+  margin-top: 8px;
+}
+
+.scene h1 {
+  margin: 0;
+  font-size: clamp(38px, 6vw, 58px);
+  font-weight: 500;
+}
+
+.diya-button {
+  position: fixed;
+  top: 22px;
+  right: 24px;
+  z-index: 10;
+  border: 0;
+  background: rgba(255,255,255,.8);
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  padding: 5px;
+  cursor: pointer;
+  box-shadow: 0 7px 25px rgba(70,40,15,.12);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.diya-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.diya-button:hover {
+  transform: scale(1.07);
+  box-shadow: 0 10px 30px rgba(70,40,15,.2);
+}
+
+.top-milk-button {
+  position: fixed;
+  top: 124px;
+  right: 24px;
+  z-index: 10;
+  width: 76px;
+  height: 76px;
+  padding: 0;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 7px 25px rgba(70,40,15,.15);
+}
+
+.top-milk-button img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.top-milk-button[hidden] {
+  display: none;
+}
+
+.milk-message {
+  position: fixed;
+  top: 207px;
+  right: 14px;
+  z-index: 11;
+  width: 150px;
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 12px;
+  background: rgba(75, 45, 32, .92);
+  color: white;
+  font-size: 13px;
+  line-height: 1.3;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(-5px);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+
+.milk-message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.temple {
+  position: relative;
+  width: min(1050px, 92vw);
+  margin: 30px auto 0;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 20px 55px rgba(65,40,20,.16);
+}
+
+.temple img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Transparent devotee placed directly over the temple image. */
+.pooja-scene {
+  position: absolute;
+  z-index: 1;
+  left: 54%;
+  bottom: 1%;
+  width: clamp(135px, 24%, 270px) !important;
+  opacity: 0;
+  transform: translateX(-50%) translateY(18px);
+  transition: opacity .45s ease, transform .45s ease;
+  pointer-events: none;
+}
+
+.pooja-scene.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.petals {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.petals.show {
+  opacity: 1;
+}
+
+.petal {
+  position: absolute;
+  top: -10%;
+  left: var(--x);
+  color: #f58cab;
+  font-size: clamp(18px, 2.2vw, 30px);
+  line-height: 1;
+  text-shadow: 0 1px 4px rgba(99, 24, 45, .28);
+  animation: falling-petal 2.5s linear var(--delay) forwards;
+}
+
+@keyframes falling-petal {
+  from { transform: translateX(0) rotate(0deg); }
+  to { transform: translateX(var(--drift)) translateY(125vh) rotate(420deg); }
+}
+
+.temple .pooja-gif-source {
+  display: none;
+}
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(45,28,18,.58);
+  backdrop-filter: blur(5px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+
+.modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.pooja-box {
+  position: relative;
+  width: min(430px, 94vw);
+  background: var(--cream);
+  border-radius: 24px;
+  padding: 26px 24px 30px;
+  text-align: center;
+  box-shadow: 0 25px 70px rgba(0,0,0,.3);
+}
+
+.pooja-gif {
+  display: block;
+  width: min(235px, 65vw);
+  height: 235px;
+  object-fit: contain;
+  margin: 0 auto 5px;
+}
+
+.pooja-box h2 {
+  margin: 6px 0 8px;
+  font-weight: 500;
+  font-size: 27px;
+}
+
+.pooja-box p {
+  color: #80695a;
+  line-height: 1.5;
+  max-width: 340px;
+  margin: 0 auto 20px;
+}
+
+.close {
+  position: absolute;
+  right: 12px;
+  top: 7px;
+  border: 0;
+  background: transparent;
+  color: #725647;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.milk-button, .finish-button {
+  border: 0;
+  border-radius: 999px;
+  background: var(--brown);
+  color: white;
+  padding: 13px 28px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.milk-box {
+  width: min(1100px, 96vw);
+  background: #17120f;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 25px 80px rgba(0,0,0,.5);
+}
+
+.milk-gif {
+  display: block;
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+}
+
+.milk-caption {
+  text-align: center;
+  color: white;
+  padding: 16px 20px 20px;
+}
+
+.milk-caption h2 {
+  margin: 0 0 6px;
+  font-weight: 500;
+}
+
+.milk-caption p {
+  margin: 0 0 15px;
+  color: #eadfce;
+}
+
+.blank-page {
+  min-height: 100vh;
+  overflow: hidden;
+  background: #fffaf1;
+}
+
+.final-scene {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.final-gif {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: min(430px, 72vw);
+  height: auto;
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(75, 45, 32, .18);
+}
+
+.final-decoration {
+  position: absolute;
+  z-index: 1;
+  width: clamp(80px, 13vw, 170px);
+  height: auto;
+  animation: gentle-float 4s ease-in-out infinite alternate;
+}
+
+.decoration-one { top: 20%; right: 10%; }
+.decoration-two { top: 11%; left: 11%; animation-delay: -.8s; }
+.decoration-three { bottom: 12%; left: 14%; animation-delay: -1.8s; }
+.decoration-four { right: 13%; bottom: 15%; animation-delay: -2.8s; }
+
+@keyframes gentle-float {
+  from { transform: translateY(-8px) rotate(-4deg); }
+  to { transform: translateY(10px) rotate(4deg); }
+}
+
+@media (max-width: 600px) {
+  .diya-button {
+    top: 12px;
+    right: 12px;
+    width: 72px;
+    height: 72px;
+  }
+  .scene { padding-top: 42px; }
+  .top-milk-button {
+    top: 94px;
+    right: 12px;
+    width: 62px;
+    height: 62px;
+  }
+  .milk-message {
+    top: 163px;
+    right: 8px;
+    width: 135px;
+  }
+  .pooja-scene {
+    left: 58%;
+    bottom: 0;
+    width: clamp(110px, 33%, 190px) !important;
+  }
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Small Offering</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="offering-page">
+
+<!-- Diya stays in the top-right corner -->
+<button class="diya-button" id="diyaButton" aria-label="Begin pooja">
+  <img src="assets/diya.png" alt="Diya">
+</button>
+<button class="milk-button top-milk-button" id="topMilkButton" aria-label="Offer milk">
+  <img src="milk.png" alt="Offer milk">
+</button>
+<p class="milk-message" id="milkMessage" role="status" aria-live="polite"></p>
+
+<main class="scene">
+  <header>
+    <div class="om">ॐ</div>
+    <h1>A Small Offering</h1>
+    <p>Tap the diya to begin the pooja.</p>
+  </header>
+
+  <!-- The Naga temple image remains on this same page -->
+  <section class="temple">
+    <img src="assets/naga-temple.png" alt="Sacred Naga temple">
+    <img id="poojaScene" class="pooja-scene" src="pooja..gif" alt="Devotee performing pooja">
+    <div class="petals" id="petals" aria-hidden="true"></div>
+  </section>
+</main>
+
+<!-- Step 1: Pooja -->
+<div class="modal" id="poojaModal" aria-hidden="true">
+  <div class="pooja-box">
+    <button class="close" id="closePooja" aria-label="Close">×</button>
+    <img src="assets/pooja-transparent.png" alt="Pooja offering" class="pooja-gif">
+    <h2>🙏 Make Your Offering</h2>
+    <p>Offer milk to the Naga Devata with a pure heart and devotion.</p>
+    <button class="milk-button" id="milkButton">🥛 Offer Milk</button>
+  </div>
+</div>
+
+<!-- Step 2: Milk animation -->
+<div class="modal milk-modal" id="milkModal" aria-hidden="true">
+  <div class="milk-box">
+    <img src="assets/milk-offering.gif" alt="Sacred milk offering" class="milk-gif">
+    <div class="milk-caption">
+      <h2>🙏 Sacred Milk Offering</h2>
+      <p>May this offering bring peace, happiness and blessings.</p>
+      <button class="finish-button" id="finishButton">Continue</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const diyaButton = document.getElementById("diyaButton");
+const poojaScene = document.getElementById("poojaScene");
+const petals = document.getElementById("petals");
+const topMilkButton = document.getElementById("topMilkButton");
+const milkMessage = document.getElementById("milkMessage");
+const poojaModal = document.getElementById("poojaModal");
+const milkModal = document.getElementById("milkModal");
+const milkButton = document.getElementById("milkButton");
+const finishButton = document.getElementById("finishButton");
+const closePooja = document.getElementById("closePooja");
+
+document.querySelector("#poojaModal h2").textContent = "Make Your Offering";
+document.querySelector("#poojaModal p").textContent = "Offer pooja to the Naga Devata with a pure heart and devotion.";
+milkButton.textContent = "Offer Pooja";
+let poojaTimer;
+let poojaComplete = false;
+
+function show(el) {
+  el.classList.add("show");
+  el.setAttribute("aria-hidden", "false");
+}
+function hide(el) {
+  el.classList.remove("show");
+  el.setAttribute("aria-hidden", "true");
+}
+
+diyaButton.addEventListener("click", () => {
+  show(poojaModal);
+});
+
+topMilkButton.addEventListener("click", () => {
+  if (!poojaComplete) {
+    milkMessage.textContent = "Please complete pooja first.";
+    milkMessage.classList.add("show");
+    setTimeout(() => milkMessage.classList.remove("show"), 2200);
+    return;
+  }
+  show(milkModal);
+});
+
+milkButton.addEventListener("click", () => {
+  hide(poojaModal);
+  clearTimeout(poojaTimer);
+  poojaScene.src = `pooja..gif?play=${Date.now()}`;
+  poojaScene.classList.add("show");
+  petals.innerHTML = Array.from({ length: 18 }, (_, index) =>
+    `<span class="petal" style="--x:${(index * 19) % 100}%;--delay:${(index % 6) * 0.12}s;--drift:${(index % 2 ? 1 : -1) * (12 + index)}px">&#10047;</span>`
+  ).join("");
+  petals.classList.add("show");
+  diyaButton.setAttribute("aria-label", "Pooja in progress");
+
+  poojaTimer = setTimeout(() => {
+    poojaScene.classList.remove("show");
+    petals.classList.remove("show");
+    petals.replaceChildren();
+    poojaComplete = true;
+    diyaButton.setAttribute("aria-label", "Offer milk");
+  }, 2500);
+});
+
+finishButton.addEventListener("click", () => {
+  window.location.href = "blank.html";
+});
+
+closePooja.addEventListener("click", () => hide(poojaModal));
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    hide(poojaModal);
+    hide(milkModal);
+  }
+});
+
+</script>
+</body>
+</html>
