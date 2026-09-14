@@ -337,13 +337,28 @@ body {
 }
 
 .final-gif {
-  position: relative;
-  z-index: 2;
   display: block;
   width: min(430px, 72vw);
   height: auto;
   border-radius: 24px;
   box-shadow: 0 18px 50px rgba(75, 45, 32, .18);
+}
+
+.final-message {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+  text-align: center;
+}
+
+.final-message p {
+  max-width: min(520px, 82vw);
+  margin: 0;
+  color: #694231;
+  font-size: clamp(18px, 2.4vw, 25px);
+  line-height: 1.45;
 }
 
 .final-decoration {
