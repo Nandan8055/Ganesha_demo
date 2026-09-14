@@ -106,23 +106,28 @@ body {
   box-shadow: 0 10px 30px rgba(70,40,15,.2);
 }
 
-.top-milk-button {
+.milk-button.top-milk-button {
   position: fixed;
   top: auto;
   right: 132px;
   bottom: 31px;
   z-index: 10;
+  display: grid;
+  place-items: center;
   width: 76px;
   height: 76px;
   padding: 0;
   overflow: hidden;
   background: rgba(255, 255, 255, .92);
+  color: initial;
   box-shadow: 0 7px 25px rgba(70,40,15,.15);
 }
 
 .top-milk-button span {
+  display: block;
   font-size: 38px;
   line-height: 1;
+  font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", sans-serif;
 }
 
 .top-milk-button[hidden] {
@@ -385,25 +390,29 @@ body {
 @media (max-width: 600px) {
   .diya-button {
     top: auto;
-    bottom: 12px;
-    right: 12px;
+    bottom: 16px;
+    right: calc(50% + 8px);
     width: 72px;
     height: 72px;
   }
   .scene { padding-top: 42px; }
-  .top-milk-button {
+  .milk-button.top-milk-button {
     top: auto;
-    right: 94px;
-    bottom: 17px;
+    right: auto;
+    left: calc(50% + 16px);
+    bottom: 21px;
     width: 62px;
     height: 62px;
   }
   .milk-message {
     top: auto;
-    right: 84px;
-    bottom: 94px;
+    right: auto;
+    left: 50%;
+    bottom: 100px;
     width: 135px;
+    transform: translate(-50%, -5px);
   }
+  .milk-message.show { transform: translate(-50%, 0); }
   .pooja-scene {
     left: 58%;
     bottom: 0;
